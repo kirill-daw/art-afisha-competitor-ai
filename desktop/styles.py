@@ -106,6 +106,35 @@ QTextEdit::placeholder, QLineEdit::placeholder {
     color: #64748b;
 }
 
+/* === ComboBox === */
+QComboBox {
+    background-color: #0d1320;
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    padding: 12px;
+    color: #f1f5f9;
+    font-size: 14px;
+}
+
+QComboBox:focus {
+    border-color: #06b6d4;
+}
+
+QComboBox::drop-down {
+    border: none;
+    width: 28px;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #1a2234;
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    color: #f1f5f9;
+    selection-background-color: rgba(6, 182, 212, 0.2);
+    selection-color: #22d3ee;
+    outline: none;
+}
+
 /* === Primary Button === */
 QPushButton#primaryButton {
     background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #06b6d4, stop:1 #22d3ee);

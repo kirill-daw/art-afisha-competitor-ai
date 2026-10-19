@@ -8,6 +8,22 @@ venv/
 ENV/
 env/
 
+# Secrets / local env files
+.env
+.env.*
+*.log
+
+# Runtime data
+history.json
+
+# Python tooling / caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
 # IDE
 .idea/
 .vscode/

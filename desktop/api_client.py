@@ -8,16 +8,16 @@ import base64
 
 class APIClient:
     """Клиент для работы с API backend"""
-    
+
     def __init__(self, base_url: str = "http://localhost:8000"):
         self.base_url = base_url
         self.timeout = 120  # 2 минуты для долгих операций
-    
+
     def _request(self, method: str, endpoint: str, **kwargs) -> Dict[str, Any]:
         """Выполнить HTTP запрос"""
         url = f"{self.base_url}{endpoint}"
         kwargs.setdefault('timeout', self.timeout)
-        
+
         try:
             response = requests.request(method, url, **kwargs)
             response.raise_for_status()
@@ -30,7 +30,7 @@ class APIClient:
             return {"success": False, "error": f"HTTP ошибка: {e}"}
         except Exception as e:
             return {"success": False, "error": str(e)}
-    
+
     def check_health(self) -> bool:
         """Проверить доступность сервера"""
         try:
@@ -38,7 +38,7 @@ class APIClient:
             return response.status_code == 200
         except:
             return False
-    
+
     def analyze_text(self, text: str) -> Dict[str, Any]:
         """Анализ текста конкурента"""
         return self._request(
@@ -46,7 +46,7 @@ class APIClient:
             "/analyze_text",
             json={"text": text}
         )
-    
+
     def analyze_image(self, image_path: str) -> Dict[str, Any]:
         """Анализ изображения конкурента"""
         try:
@@ -57,24 +57,29 @@ class APIClient:
             return {"success": False, "error": "Файл не найден"}
         except Exception as e:
             return {"success": False, "error": str(e)}
-    
+
     def analyze_image_bytes(self, image_bytes: bytes, filename: str = "image.jpg") -> Dict[str, Any]:
         """Анализ изображения из bytes"""
         files = {'file': (filename, image_bytes, 'image/jpeg')}
         return self._request("POST", "/analyze_image", files=files)
-    
-    def parse_demo(self, url: str) -> Dict[str, Any]:
-        """Парсинг и анализ сайта"""
+
+    def parse_demo(self, url: Optional[str] = None, competitor: Optional[str] = None) -> Dict[str, Any]:
+        """Парсинг и анализ сайта (по URL или ключу конкурента из списка)"""
+        payload = {"competitor": competitor} if competitor else {"url": url}
         return self._request(
             "POST",
             "/parse_demo",
-            json={"url": url}
+            json=payload
         )
-    
+
+    def get_competitors(self) -> Dict[str, Any]:
+        """Получить список конкурентов для автоматического сбора данных"""
+        return self._request("GET", "/competitors")
+
     def get_history(self) -> Dict[str, Any]:
         """Получить историю запросов"""
         return self._request("GET", "/history")
-    
+
     def clear_history(self) -> Dict[str, Any]:
         """Очистить историю"""
         return self._request("DELETE", "/history")
@@ -82,4 +87,3 @@ class APIClient:
 
 # Глобальный экземпляр
 api_client = APIClient()
-

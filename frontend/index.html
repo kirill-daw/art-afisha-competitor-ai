@@ -71,7 +71,7 @@
         <main class="main">
             <header class="header">
                 <h1 class="page-title">Мониторинг конкурентов</h1>
-                <p class="page-subtitle">AI-ассистент для анализа конкурентной среды</p>
+                <p class="page-subtitle">AI-ассистент для анализа конкурентов «Арт-Афиши» — сервисов поиска культурных событий, мероприятий и билетов</p>
             </header>
 
             <div class="content">
@@ -80,14 +80,14 @@
                     <div class="card">
                         <div class="card-header">
                             <h2>Анализ текста конкурента</h2>
-                            <p>Вставьте текст с сайта конкурента, из рекламы или описания продукта</p>
+                            <p>Вставьте описание сервиса конкурента из ниши событий и билетов: текст с сайта, из рекламы или описания продукта</p>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="competitor-text">Текст для анализа</label>
                                 <textarea 
                                     id="competitor-text" 
-                                    placeholder="Вставьте текст конкурента для анализа...&#10;&#10;Например: описание продукта, текст с лендинга, рекламное объявление..."
+                                    placeholder="Вставьте текст конкурента для анализа...&#10;&#10;Например: описание сервиса поиска мероприятий, текст с лендинга, описание тарифов для организаторов..."
                                     rows="8"
                                 ></textarea>
                             </div>
@@ -106,7 +106,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h2>Анализ изображений</h2>
-                            <p>Загрузите скриншот сайта, баннер или фото упаковки конкурента</p>
+                            <p>Загрузите скриншот сайта или приложения конкурента, баннер, карточку события</p>
                         </div>
                         <div class="card-body">
                             <div class="upload-zone" id="upload-zone">
@@ -139,10 +139,16 @@
                 <section class="tab-content" id="parse-tab">
                     <div class="card">
                         <div class="card-header">
-                            <h2>Парсинг сайта конкурента</h2>
-                            <p>Введите URL сайта для автоматического извлечения и анализа контента</p>
+                            <h2>Сбор и анализ сайта конкурента</h2>
+                            <p>Выберите конкурента из списка или укажите свой URL — данные собираются через Selenium и анализируются AI</p>
                         </div>
                         <div class="card-body">
+                            <div class="form-group">
+                                <label for="competitor-select">Конкурент</label>
+                                <select id="competitor-select">
+                                    <option value="">— Свой URL —</option>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for="url-input">URL сайта</label>
                                 <div class="input-group">
@@ -158,7 +164,7 @@
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
                                 </svg>
-                                Парсить и анализировать
+                                Собрать и проанализировать
                             </button>
                         </div>
                     </div>
